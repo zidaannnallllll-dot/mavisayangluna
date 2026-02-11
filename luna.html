@@ -3,183 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infinity & Beyond for Luna ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <title>Untuk Luna Sayang ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #ff69b4; --secondary: #ff1493; --dark-bg: #030303; --glass: rgba(255, 255, 255, 0.08); }
+        :root { --pink-soft: #ffe4e1; --pink-bold: #ffb6c1; --rose: #ff69b4; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: var(--dark-bg); color: #fff; font-family: 'Poppins', sans-serif; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        body { background: var(--pink-soft); font-family: 'Poppins', sans-serif; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 
-        /* Background Pro: Aurora & Stars */
-        #canvas { position: absolute; top: 0; left: 0; z-index: 1; pointer-events: none; }
-        .aurora { position: absolute; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,105,180,0.05) 0%, transparent 50%); animation: drift 20s linear infinite; z-index: 0; }
-        @keyframes drift { from { transform: translate(-25%, -25%) rotate(0deg); } to { transform: translate(-25%, -25%) rotate(360deg); } }
+        .container { width: 90%; max-width: 380px; background: white; border-radius: 30px; padding: 30px; box-shadow: 0 10px 30px rgba(255,182,193,0.5); text-align: center; z-index: 10; border: 4px solid white; outline: 2px solid var(--pink-bold); }
 
-        /* Main Card */
-        .card { z-index: 10; width: 90%; max-width: 420px; background: var(--glass); backdrop-filter: blur(25px); border: 1px solid rgba(255, 105, 180, 0.3); border-radius: 40px; padding: 40px 30px; text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.5); position: relative; }
+        .slide { display: none; animation: fade 0.8s ease; }
+        .active { display: block; }
+        @keyframes fade { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
 
-        /* Typography */
-        h1 { font-family: 'Dancing Script', cursive; font-size: 2.8em; color: var(--primary); margin-bottom: 10px; text-shadow: 0 0 20px rgba(255, 105, 180, 0.5); }
-        p { font-size: 0.95em; line-height: 1.7; color: #e0e0e0; font-weight: 300; }
-        
-        /* Slides Logic */
-        .slide { display: none; opacity: 0; transform: translateY(20px); transition: all 0.8s ease; }
-        .slide.active { display: block; opacity: 1; transform: translateY(0); }
+        h1 { font-family: 'Dancing Script', cursive; color: var(--rose); font-size: 2em; margin-bottom: 15px; }
+        p { font-size: 0.9em; color: #888; margin-bottom: 20px; }
 
-        /* Input & Buttons */
-        .input-group { margin: 25px 0; }
-        input { width: 100%; padding: 15px; border-radius: 15px; border: 1px solid rgba(255,105,180,0.5); background: rgba(0,0,0,0.4); color: white; text-align: center; font-size: 1.1em; outline: none; transition: 0.3s; }
-        input:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(255,105,180,0.3); }
-        
-        .btn { background: linear-gradient(45deg, var(--primary), var(--secondary)); color: white; border: none; padding: 15px 35px; border-radius: 50px; cursor: pointer; font-weight: 600; width: 100%; margin-top: 15px; transition: 0.4s; box-shadow: 0 10px 20px rgba(255, 20, 147, 0.3); }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(255, 20, 147, 0.5); }
+        /* Style Gambar */
+        .gif-img { width: 150px; margin-bottom: 10px; border-radius: 20px; }
 
-        /* Timer Aesthetic */
-        #timer-container { background: rgba(255, 105, 180, 0.1); border-radius: 20px; padding: 20px; margin: 20px 0; border: 1px solid rgba(255,105,180,0.2); }
-        .timer-unit { display: inline-block; margin: 0 5px; }
-        .timer-val { font-size: 1.4em; font-weight: 600; color: var(--primary); display: block; }
-        .timer-label { font-size: 0.6em; text-transform: uppercase; letter-spacing: 1px; }
+        /* Keypad Password */
+        .keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; }
+        .key { background: var(--pink-soft); color: var(--rose); border: none; padding: 15px; border-radius: 15px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .key:active { transform: scale(0.9); background: var(--pink-bold); }
+        .dot-container { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+        .dot { width: 12px; height: 12px; border: 2px solid var(--pink-bold); border-radius: 50%; }
+        .dot.filled { background: var(--rose); border-color: var(--rose); }
 
-        /* Interactive Cursor Heart */
-        .cursor-p { position: fixed; pointer-events: none; z-index: 999; animation: fly 1s ease-out forwards; }
-        @keyframes fly { to { transform: translateY(-100px) scale(0); opacity: 0; } }
+        /* Tombol Umum */
+        .btn-next { background: var(--rose); color: white; border: none; padding: 12px 25px; border-radius: 50px; font-weight: bold; cursor: pointer; width: 100%; margin-top: 15px; box-shadow: 0 5px 15px rgba(255,105,180,0.3); }
+
+        /* Timer */
+        #timer { background: #fff0f5; padding: 15px; border-radius: 20px; margin: 15px 0; color: var(--rose); font-weight: bold; border: 2px dashed var(--pink-bold); }
+
+        canvas { position: absolute; top: 0; left: 0; pointer-events: none; z-index: 100; }
     </style>
 </head>
-<body onclick="playMusic()" onmousemove="handleMove(event)" ontouchmove="handleMove(event)">
-    <div class="aurora"></div>
+<body onclick="playMusic()">
     <canvas id="canvas"></canvas>
-    <audio id="bgm" loop><source src="https://files.catbox.moe/3v666v.mp3" type="audio/mpeg"></audio>
+    <audio id="lagu" loop><source src="https://files.catbox.moe/3v666v.mp3" type="audio/mpeg"></audio>
 
-    <div class="card">
+    <div class="container">
         <div class="slide active" id="s1">
-            <h1>Secret Gate</h1>
-            <p>Welcome, Beautiful. Please verify your identity to continue our story.</p>
-            <div class="input-group">
-                <input type="password" id="pass" placeholder="Password: DDMMYY">
-            </div>
-            <button class="btn" onclick="validate()">Unlock Memory ✨</button>
+            <img src="https://media.tenor.com/On7VseGwnmYAAAAi/peach-goma.gif" class="gif-img">
+            <h1>hallo sayangkuu! ❤️</h1>
+            <p>klik di manapun yaa</p>
+            <button class="btn-next" onclick="next(2)">tap disini!! 🥰</button>
+            <p style="font-size: 0.7em; margin-top: 10px;">clue: our anniversary</p>
         </div>
 
         <div class="slide" id="s2">
-            <h1>Hi, Luna.. ❤️</h1>
-            <p>Mungkin aku bukan cowok yang paling romantis di dunia, tapi lewat baris-baris kode ini, aku mau bilang kalau aku bersyukur punya kamu.</p>
-            <button class="btn" onclick="goTo(3)">Continue ➡️</button>
+            <img src="https://media.tenor.com/8m4Yk_t6m70AAAAi/cute-cat.gif" class="gif-img" style="width: 100px;">
+            <p>hihi coba tebak passwordnya,<br>i bet u know!</p>
+            <div class="dot-container" id="dots">
+                <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+            <div class="keypad">
+                <button class="key" onclick="press(1)">1</button><button class="key" onclick="press(2)">2</button><button class="key" onclick="press(3)">3</button>
+                <button class="key" onclick="press(4)">4</button><button class="key" onclick="press(5)">5</button><button class="key" onclick="press(6)">6</button>
+                <button class="key" onclick="press(7)">7</button><button class="key" onclick="press(8)">8</button><button class="key" onclick="press(9)">9</button>
+                <button class="key" onclick="clearPass()">C</button><button class="key" onclick="press(0)">0</button>
+            </div>
         </div>
 
         <div class="slide" id="s3">
-            <h1>31 Days of Us</h1>
-            <p>Satu bulan yang singkat, tapi penuh warna. Makasih udah jadi partner ngobrol, partner becanda, dan penjaga hati yang luar biasa.</p>
-            <button class="btn" onclick="goTo(4)">Our Time ⏳</button>
+            <img src="https://media.tenor.com/K_f9_4p366sAAAAi/tkthao219-bubududu.gif" class="gif-img">
+            <h1>Happy 1 Month!</h1>
+            <div id="timer">0 Hari 0 Jam 0 Menit 0 Detik</div>
+            <p>Terima kasih sudah mewarnai hari-hariku selama sebulan ini.</p>
+            <button class="btn-next" onclick="next(4)">Lanjut Sayang? ❤️</button>
         </div>
 
         <div class="slide" id="s4">
-            <h1>Infinity & Counting</h1>
-            <div id="timer-container">
-                <div class="timer-unit"><span class="timer-val" id="d">0</span><span class="timer-label">Days</span></div>
-                <div class="timer-unit"><span class="timer-val" id="h">0</span><span class="timer-label">Hrs</span></div>
-                <div class="timer-unit"><span class="timer-val" id="m">0</span><span class="timer-label">Min</span></div>
-                <div class="timer-unit"><span class="timer-val" id="s">0</span><span class="timer-label">Sec</span></div>
-            </div>
-            <p>Every second with you is a gift I never want to lose.</p>
-            <button class="btn" onclick="goTo(5)">A Little Question.. 🥺</button>
+            <img src="https://media.tenor.com/v8p1E9yX6m8AAAAi/cute-love.gif" class="gif-img">
+            <h1>Satu Pertanyaan..</h1>
+            <p>Masih mau kan bareng Mavi terus?</p>
+            <button class="btn-next" onclick="explode(); next(5)">MAU BANGET! ❤️</button>
+            <button class="btn-next" id="noBtn" style="background:white; color:var(--rose); border:1px solid var(--rose);" onmouseover="lari()">Nggak / Malesin 🏃‍♂️</button>
         </div>
 
         <div class="slide" id="s5">
-            <h1>The Truth</h1>
-            <p>Di skala 1-10, seberapa sayang kamu sama Mavi hari ini? (Klik tombol di bawah)</p>
-            <button class="btn" onclick="triggerExplosion()">1.000.000/10! ❤️</button>
-            <button class="btn" id="noBtn" style="background:none; border:1px solid var(--primary); color:var(--primary);" onmouseover="dodge()">Cuma 1/10 🏃‍♂️</button>
-        </div>
-
-        <div class="slide" id="s6">
-            <h1>Happy 1st Anniversary</h1>
-            <p>Terima kasih untuk bulan pertama yang indah ini. Mari buat ribuan bulan lainnya bersama-sama.</p>
-            <h1 style="font-size: 2em; margin-top: 20px;">I Love You More</h1>
-            <p style="opacity: 0.5; font-size: 0.7em;">Luna ❤️ Mavi | 11.01.2026</p>
+            <img src="https://media.tenor.com/j_6lY8hW6mAAAAAi/love-mochi.gif" class="gif-img">
+            <h1>I Love You More!</h1>
+            <p>Luna ❤️ Mavi</p>
+            <p style="font-size: 0.8em;">Tetap jadi penjaga hatiku ya cantik. Happy Mansiversary!</p>
         </div>
     </div>
 
     <script>
-        // -- Configuration --
-        const startDate = new Date("2026-01-11T00:00:00");
-        const audio = document.getElementById("bgm");
-        
+        let passInput = "";
+        const correctPass = "110126";
+        const audio = document.getElementById("lagu");
+
         function playMusic() { audio.play().catch(() => {}); }
 
-        // -- Navigation --
-        function validate() {
-            if(document.getElementById('pass').value === '110126') goTo(2);
-            else alert("Akses Ditolak! Password salah sayang ❤️");
-        }
-
-        function goTo(n) {
+        function next(n) {
             document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
-            const target = document.getElementById('s'+n);
-            target.classList.add('active');
+            document.getElementById('s'+n).classList.add('active');
         }
 
-        // -- Interactive Dodge --
-        function dodge() {
+        function press(num) {
+            if(passInput.length < 6) {
+                passInput += num;
+                updateDots();
+                if(passInput === correctPass) {
+                    setTimeout(() => next(3), 300);
+                } else if (passInput.length === 6) {
+                    alert("Salah sayang! 😡");
+                    clearPass();
+                }
+            }
+        }
+
+        function clearPass() { passInput = ""; updateDots(); }
+
+        function updateDots() {
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, i) => {
+                if(i < passInput.length) dot.classList.add('filled');
+                else dot.classList.remove('filled');
+            });
+        }
+
+        function lari() {
             const btn = document.getElementById('noBtn');
             btn.style.position = 'fixed';
             btn.style.left = Math.random() * 80 + '%';
             btn.style.top = Math.random() * 80 + '%';
         }
 
-        // -- Particle System (The "Wah" Effect) --
+        // --- Efek Ledakan Partikel ---
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
-        let particles = [];
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-
-        class Particle {
-            constructor(x, y, color) {
-                this.x = x; this.y = y; this.color = color;
-                this.size = Math.random() * 3 + 1;
-                this.speedX = Math.random() * 3 - 1.5;
-                this.speedY = Math.random() * 3 - 1.5;
-                this.opacity = 1;
-            }
-            update() {
-                this.x += this.speedX; this.y += this.speedY;
-                this.opacity -= 0.01;
-            }
-            draw() {
-                ctx.globalAlpha = this.opacity;
-                ctx.fillStyle = this.color;
-                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill();
+        let particles = [];
+        function explode() {
+            for(let i=0; i<100; i++) {
+                particles.push({
+                    x: canvas.width/2, y: canvas.height/2,
+                    v: {x: (Math.random()-0.5)*15, y: (Math.random()-0.5)*15},
+                    a: 1, c: '#ff69b4'
+                });
             }
         }
-
-        function handleMove(e) {
-            const x = e.pageX || e.touches[0].pageX;
-            const y = e.pageY || e.touches[0].pageY;
-            for(let i=0; i<2; i++) particles.push(new Particle(x, y, '#ff69b4'));
-        }
-
-        function triggerExplosion() {
-            for(let i=0; i<100; i++) particles.push(new Particle(window.innerWidth/2, window.innerHeight/2, '#ff1493'));
-            setTimeout(() => goTo(6), 1000);
-        }
-
-        function animate() {
+        function draw() {
             ctx.clearRect(0,0,canvas.width,canvas.height);
             particles.forEach((p, i) => {
-                p.update(); p.draw();
-                if(p.opacity <= 0) particles.splice(i, 1);
+                p.x += p.v.x; p.y += p.v.y; p.a -= 0.01;
+                ctx.globalAlpha = p.a; ctx.fillStyle = p.c;
+                ctx.beginPath(); ctx.arc(p.x, p.y, 5, 0, Math.PI*2); ctx.fill();
+                if(p.a <= 0) particles.splice(i, 1);
             });
-            requestAnimationFrame(animate);
+            requestAnimationFrame(draw);
         }
-        animate();
+        draw();
 
-        // -- Live Counter --
+        // --- Timer ---
         setInterval(() => {
-            const now = new Date();
-            const diff = now - startDate;
-            document.getElementById('d').innerText = Math.floor(diff/(1000*60*60*24));
-            document.getElementById('h').innerText = Math.floor((diff/(1000*60*60))%24);
-            document.getElementById('m').innerText = Math.floor((diff/(1000*60))%60);
-            document.getElementById('s').innerText = Math.floor((diff/1000)%60);
+            const diff = new Date() - new Date("2026-01-11T00:00:00");
+            const d = Math.floor(diff/(1000*60*60*24));
+            const h = Math.floor((diff/(1000*60*60))%24);
+            const m = Math.floor((diff/(1000*60))%60);
+            const s = Math.floor((diff/1000)%60);
+            document.getElementById('timer').innerText = `${d} Hari ${h} Jam ${m} Menit ${s} Detik`;
         }, 1000);
     </script>
 </body>
