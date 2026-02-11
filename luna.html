@@ -79,7 +79,7 @@
 
 <script>
     function nextSlide(curr) {
-        if (curr === 1) document.getElementById('mySong').play();
+        document.getElementById('mySong').play().catch(e => console.log("Menunggu klik..."));
         document.getElementById('s' + curr).classList.remove('active');
         document.getElementById('s' + (curr + 1)).classList.add('active');
     }
@@ -115,9 +115,12 @@
             }
         }
         setInterval(draw, 40);
-    }
+    }document.body.addEventListener('click', function() {
+    document.getElementById('mySong').play();
+}, { once: true });
 </script>
 </body>
 
 </html>
+
 
