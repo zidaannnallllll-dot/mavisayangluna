@@ -28,4 +28,159 @@
 
         /* Input & Buttons */
         .input-group { margin: 25px 0; }
-        input { width: 100%; padding: 15px; border-radius: 15px; border: 1px solid rgba(255,105,18
+        input { width: 100%; padding: 15px; border-radius: 15px; border: 1px solid rgba(255,105,180,0.5); background: rgba(0,0,0,0.4); color: white; text-align: center; font-size: 1.1em; outline: none; transition: 0.3s; }
+        input:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(255,105,180,0.3); }
+        
+        .btn { background: linear-gradient(45deg, var(--primary), var(--secondary)); color: white; border: none; padding: 15px 35px; border-radius: 50px; cursor: pointer; font-weight: 600; width: 100%; margin-top: 15px; transition: 0.4s; box-shadow: 0 10px 20px rgba(255, 20, 147, 0.3); }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(255, 20, 147, 0.5); }
+
+        /* Timer Aesthetic */
+        #timer-container { background: rgba(255, 105, 180, 0.1); border-radius: 20px; padding: 20px; margin: 20px 0; border: 1px solid rgba(255,105,180,0.2); }
+        .timer-unit { display: inline-block; margin: 0 5px; }
+        .timer-val { font-size: 1.4em; font-weight: 600; color: var(--primary); display: block; }
+        .timer-label { font-size: 0.6em; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Interactive Cursor Heart */
+        .cursor-p { position: fixed; pointer-events: none; z-index: 999; animation: fly 1s ease-out forwards; }
+        @keyframes fly { to { transform: translateY(-100px) scale(0); opacity: 0; } }
+    </style>
+</head>
+<body onclick="playMusic()" onmousemove="handleMove(event)" ontouchmove="handleMove(event)">
+    <div class="aurora"></div>
+    <canvas id="canvas"></canvas>
+    <audio id="bgm" loop><source src="https://files.catbox.moe/3v666v.mp3" type="audio/mpeg"></audio>
+
+    <div class="card">
+        <div class="slide active" id="s1">
+            <h1>Secret Gate</h1>
+            <p>Welcome, Beautiful. Please verify your identity to continue our story.</p>
+            <div class="input-group">
+                <input type="password" id="pass" placeholder="Password: DDMMYY">
+            </div>
+            <button class="btn" onclick="validate()">Unlock Memory ✨</button>
+        </div>
+
+        <div class="slide" id="s2">
+            <h1>Hi, Luna.. ❤️</h1>
+            <p>Mungkin aku bukan cowok yang paling romantis di dunia, tapi lewat baris-baris kode ini, aku mau bilang kalau aku bersyukur punya kamu.</p>
+            <button class="btn" onclick="goTo(3)">Continue ➡️</button>
+        </div>
+
+        <div class="slide" id="s3">
+            <h1>31 Days of Us</h1>
+            <p>Satu bulan yang singkat, tapi penuh warna. Makasih udah jadi partner ngobrol, partner becanda, dan penjaga hati yang luar biasa.</p>
+            <button class="btn" onclick="goTo(4)">Our Time ⏳</button>
+        </div>
+
+        <div class="slide" id="s4">
+            <h1>Infinity & Counting</h1>
+            <div id="timer-container">
+                <div class="timer-unit"><span class="timer-val" id="d">0</span><span class="timer-label">Days</span></div>
+                <div class="timer-unit"><span class="timer-val" id="h">0</span><span class="timer-label">Hrs</span></div>
+                <div class="timer-unit"><span class="timer-val" id="m">0</span><span class="timer-label">Min</span></div>
+                <div class="timer-unit"><span class="timer-val" id="s">0</span><span class="timer-label">Sec</span></div>
+            </div>
+            <p>Every second with you is a gift I never want to lose.</p>
+            <button class="btn" onclick="goTo(5)">A Little Question.. 🥺</button>
+        </div>
+
+        <div class="slide" id="s5">
+            <h1>The Truth</h1>
+            <p>Di skala 1-10, seberapa sayang kamu sama Mavi hari ini? (Klik tombol di bawah)</p>
+            <button class="btn" onclick="triggerExplosion()">1.000.000/10! ❤️</button>
+            <button class="btn" id="noBtn" style="background:none; border:1px solid var(--primary); color:var(--primary);" onmouseover="dodge()">Cuma 1/10 🏃‍♂️</button>
+        </div>
+
+        <div class="slide" id="s6">
+            <h1>Happy 1st Anniversary</h1>
+            <p>Terima kasih untuk bulan pertama yang indah ini. Mari buat ribuan bulan lainnya bersama-sama.</p>
+            <h1 style="font-size: 2em; margin-top: 20px;">I Love You More</h1>
+            <p style="opacity: 0.5; font-size: 0.7em;">Luna ❤️ Mavi | 11.01.2026</p>
+        </div>
+    </div>
+
+    <script>
+        // -- Configuration --
+        const startDate = new Date("2026-01-11T00:00:00");
+        const audio = document.getElementById("bgm");
+        
+        function playMusic() { audio.play().catch(() => {}); }
+
+        // -- Navigation --
+        function validate() {
+            if(document.getElementById('pass').value === '110126') goTo(2);
+            else alert("Akses Ditolak! Password salah sayang ❤️");
+        }
+
+        function goTo(n) {
+            document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+            const target = document.getElementById('s'+n);
+            target.classList.add('active');
+        }
+
+        // -- Interactive Dodge --
+        function dodge() {
+            const btn = document.getElementById('noBtn');
+            btn.style.position = 'fixed';
+            btn.style.left = Math.random() * 80 + '%';
+            btn.style.top = Math.random() * 80 + '%';
+        }
+
+        // -- Particle System (The "Wah" Effect) --
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+
+        class Particle {
+            constructor(x, y, color) {
+                this.x = x; this.y = y; this.color = color;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 3 - 1.5;
+                this.speedY = Math.random() * 3 - 1.5;
+                this.opacity = 1;
+            }
+            update() {
+                this.x += this.speedX; this.y += this.speedY;
+                this.opacity -= 0.01;
+            }
+            draw() {
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = this.color;
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill();
+            }
+        }
+
+        function handleMove(e) {
+            const x = e.pageX || e.touches[0].pageX;
+            const y = e.pageY || e.touches[0].pageY;
+            for(let i=0; i<2; i++) particles.push(new Particle(x, y, '#ff69b4'));
+        }
+
+        function triggerExplosion() {
+            for(let i=0; i<100; i++) particles.push(new Particle(window.innerWidth/2, window.innerHeight/2, '#ff1493'));
+            setTimeout(() => goTo(6), 1000);
+        }
+
+        function animate() {
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            particles.forEach((p, i) => {
+                p.update(); p.draw();
+                if(p.opacity <= 0) particles.splice(i, 1);
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // -- Live Counter --
+        setInterval(() => {
+            const now = new Date();
+            const diff = now - startDate;
+            document.getElementById('d').innerText = Math.floor(diff/(1000*60*60*24));
+            document.getElementById('h').innerText = Math.floor((diff/(1000*60*60))%24);
+            document.getElementById('m').innerText = Math.floor((diff/(1000*60))%60);
+            document.getElementById('s').innerText = Math.floor((diff/1000)%60);
+        }, 1000);
+    </script>
+</body>
+</html>
