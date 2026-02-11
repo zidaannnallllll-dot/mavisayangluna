@@ -3,124 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Mansiversary Luna ❤️</title>
+    <title>Infinity & Beyond for Luna ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <style>
-        :root { --pink: #ffafcc; --hot-pink: #ff4d6d; --soft-white: #fff0f3; }
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background-color: #000; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; overflow: hidden; }
-        #phone-screen { width: 85vw; height: calc(85vw * 4 / 3); max-width: 360px; max-height: 480px; background: linear-gradient(135deg, #1a1a1a 0%, #000 100%); border-radius: 35px; border: 5px solid #333; position: relative; overflow: hidden; box-shadow: 0 0 50px rgba(255, 77, 109, 0.3); }
-        .slide { position: absolute; width: 100%; height: 100%; display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 30px; box-sizing: border-box; }
-        .active { display: flex; animation: slideUp 0.6s forwards; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        #lock-timer { font-size: 3.5rem; font-weight: 300; color: white; margin-bottom: 5px; }
-        .lock-hint { color: var(--pink); font-size: 1rem; margin-bottom: 25px; opacity: 0.8; }
-        input { background: rgba(255, 255, 255, 0.1); border: 2px solid var(--pink); color: white; padding: 12px; border-radius: 15px; width: 80%; text-align: center; font-size: 1.5rem; letter-spacing: 5px; outline: none; margin: 15px 0; }
-        button { background: var(--hot-pink); border: none; color: white; padding: 12px 28px; border-radius: 50px; font-weight: bold; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4); }
-        button:hover { transform: scale(1.1); background: #ff85a1; }
-        .sweet-words { font-size: 1.05rem; line-height: 1.6; color: var(--soft-white); font-style: italic; }
-        .icon-love { font-size: 4rem; margin-bottom: 15px; filter: drop-shadow(0 0 10px var(--hot-pink)); }
-        .floating { animation: float 3s ease-in-out infinite; }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-        canvas { position: absolute; top: 0; left: 0; display: none; z-index: 1; }
-        #final-msg { position: absolute; z-index: 2; display: none; text-align: center; color: white; background: rgba(0,0,0,0.6); padding: 20px; border-radius: 20px; backdrop-filter: blur(5px); }
-    </style>
-</head>
-<body>
-<div id="phone-screen">
-    <div class="slide active" id="s1">
-        <div id="lock-timer">11:02</div>
-        <div class="lock-hint">Wednesday, 11 February</div>
-        <div class="floating" style="font-size: 5rem;">☁️</div>
-        <button onclick="nextSlide(1)">Buka Sayang ✨</button>
-    </div>
-    <div class="slide" id="s2">
-        <div class="icon-love">🔒</div>
-        <p style="color:white">Enter Passcode</p>
-        <input type="password" id="passInput" maxlength="6" placeholder="******">
-        <button onclick="checkPass()">Unlock</button>
-    </div>
-    <div class="slide" id="s3">
-        <div class="icon-love">🧸</div>
-        <h2 id="qText" style="color:var(--pink)">Mau lanjut liat kejutan dari Mavi?</h2>
-        <button onclick="nextSlide(3)">Iya Lanjut ❤️</button>
-        <button onclick="ngambek()" style="background: #555; margin-top:10px;">Gak Mau</button>
-    </div>
-    <div class="slide" id="s4">
-        <div class="icon-love floating">💖</div>
-        <p class="sweet-words">"Luna, tau gak? Sejak 11 Januari kemarin, duniaku rasanya jadi jauh lebih berwarna..."</p>
-        <button onclick="nextSlide(4)">Next ✨</button>
-    </div>
-    <div class="slide" id="s5">
-        <div class="icon-love floating">✨</div>
-        <p class="sweet-words">"Makasih ya udah sabar sama Mavi, makasih udah mau dengerin semua cerita Mavi..."</p>
-        <button onclick="nextSlide(5)">Terus? 🎀</button>
-    </div>
-    <div class="slide" id="s6">
-        <div class="icon-love floating">🌸</div>
-        <p class="sweet-words">"Gak kerasa ya udah sebulan. Mavi beruntung banget bisa punya kamu di hidup Mavi."</p>
-        <button onclick="nextSlide(6)">Lanjut...</button>
-    </div>
-    <div class="slide" id="s7">
-        <div class="icon-love floating">🌙</div>
-        <p class="sweet-words">"Jangan bosen-bosen ya sama Mavi. Kita bikin kenangan manis lebih banyak lagi, oke?"</p>
-        <button onclick="nextSlide(7)">Dikit lagi 💌</button>
-    </div>
-    <div class="slide" id="s8">
-        <div class="icon-love floating">💍</div>
-        <p class="sweet-words">"Happy 1st Mansiversary, Luna Cantik. Kamu adalah penjaga hati Mavi sekarang."</p>
-        <button onclick="startMatrix()">SEE THE MAGIC ✨</button>
-    </div>
-    <canvas id="Matrix"></canvas>
-    <div id="final-msg">
-        <h2 style="color: var(--hot-pink); margin:0;">LUNA ❤️ MAVI</h2>
-        <p>11-01-2026<br>HAPPY MANSIVERSARY</p>
-    </div>
-</div>
-<audio id="mySong" loop><source src="https://files.catbox.moe/3v666v.mp3" type="audio/mpeg"></audio>
+        :root { --primary: #ff69b4; --secondary: #ff1493; --dark-bg: #030303; --glass: rgba(255, 255, 255, 0.08); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--dark-bg); color: #fff; font-family: 'Poppins', sans-serif; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; }
 
-<script>
-    function nextSlide(curr) {
-        document.getElementById('mySong').play().catch(e => console.log("Menunggu klik..."));
-        document.getElementById('s' + curr).classList.remove('active');
-        document.getElementById('s' + (curr + 1)).classList.add('active');
-    }
-    function checkPass() {
-        if(document.getElementById('passInput').value === "110126") nextSlide(2);
-        else alert("Salah sayang! 🥺");
-    }
-    function ngambek() { document.getElementById('qText').innerHTML = "Ih klik IYA cepet! 😤"; }
-    function startMatrix() {
-        document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
-        document.getElementById('Matrix').style.display = 'block';
-        document.getElementById('final-msg').style.display = 'block';
-        runMatrix();
-    }
-    function runMatrix() {
-        const canvas = document.getElementById('Matrix');
-        const ctx = canvas.getContext('2d');
-        canvas.width = 360; canvas.height = 480;
-        const txt = 'LUNAMAVI110126💖';
-        const fontSize = 16;
-        const columns = canvas.width / fontSize;
-        const drops = Array(Math.floor(columns)).fill(1);
-        function draw() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.font = fontSize + 'px monospace';
-            for (let i = 0; i < drops.length; i++) {
-                const char = txt[Math.floor(Math.random() * txt.length)];
-                ctx.fillStyle = Math.random() > 0.9 ? '#fff' : '#ff4d6d';
-                ctx.fillText(char, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
-            }
-        }
-        setInterval(draw, 40);
-    }document.body.addEventListener('click', function() {
-    document.getElementById('mySong').play();
-}, { once: true });
-</script>
-</body>
+        /* Background Pro: Aurora & Stars */
+        #canvas { position: absolute; top: 0; left: 0; z-index: 1; pointer-events: none; }
+        .aurora { position: absolute; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,105,180,0.05) 0%, transparent 50%); animation: drift 20s linear infinite; z-index: 0; }
+        @keyframes drift { from { transform: translate(-25%, -25%) rotate(0deg); } to { transform: translate(-25%, -25%) rotate(360deg); } }
 
-</html>
+        /* Main Card */
+        .card { z-index: 10; width: 90%; max-width: 420px; background: var(--glass); backdrop-filter: blur(25px); border: 1px solid rgba(255, 105, 180, 0.3); border-radius: 40px; padding: 40px 30px; text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.5); position: relative; }
 
+        /* Typography */
+        h1 { font-family: 'Dancing Script', cursive; font-size: 2.8em; color: var(--primary); margin-bottom: 10px; text-shadow: 0 0 20px rgba(255, 105, 180, 0.5); }
+        p { font-size: 0.95em; line-height: 1.7; color: #e0e0e0; font-weight: 300; }
+        
+        /* Slides Logic */
+        .slide { display: none; opacity: 0; transform: translateY(20px); transition: all 0.8s ease; }
+        .slide.active { display: block; opacity: 1; transform: translateY(0); }
 
+        /* Input & Buttons */
+        .input-group { margin: 25px 0; }
+        input { width: 100%; padding: 15px; border-radius: 15px; border: 1px solid rgba(255,105,18
