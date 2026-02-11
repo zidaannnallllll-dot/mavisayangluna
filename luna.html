@@ -3,91 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Luna ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <title>For My Universe: Luna ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <style>
         :root { --pink-bg: #fff0f5; --pink-bold: #ffb6c1; --rose: #ff69b4; --white: #ffffff; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        /* BACKGROUND KEREN (AURORA & STARS) */
-        body { 
-            background: #050505; /* Dasar gelap biar aurora kelihatan */
-            font-family: 'Poppins', sans-serif; 
-            height: 100vh; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            overflow: hidden; 
-            perspective: 1000px;
-        }
+        body { background: #050505; font-family: 'Poppins', sans-serif; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 
-        /* Animasi Aurora di Background */
-        .aurora {
-            position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(255,182,193,0.15) 0%, transparent 40%);
-            animation: rotateAurora 20s linear infinite;
-            z-index: 0;
-        }
-        @keyframes rotateAurora { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        /* Background Aurora */
+        .aurora { position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,105,180,0.2) 0%, transparent 50%); animation: rotate 25s linear infinite; z-index: 0; }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        /* CONTAINER CARD (Gaya Coquette) */
         .container { 
-            width: 90%; 
-            max-width: 370px; 
-            background: rgba(255, 255, 255, 0.95); /* Sedikit transparan */
-            border-radius: 40px; 
-            padding: 35px 25px; 
-            box-shadow: 0 0 40px rgba(255,105,180,0.4); 
-            text-align: center; 
-            z-index: 10; 
-            border: 6px solid var(--white);
-            transform-style: preserve-3d;
-            animation: cardPop 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 90%; max-width: 380px; background: rgba(255, 255, 255, 0.95); border-radius: 40px; 
+            padding: 30px; box-shadow: 0 0 50px rgba(255,105,180,0.5); text-align: center; z-index: 10; 
+            border: 6px solid var(--white); animation: cardEntry 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        @keyframes cardPop { from { opacity: 0; transform: scale(0.5) rotateX(-30deg); } to { opacity: 1; transform: scale(1) rotateX(0); } }
-
-        .container::before { content: '🎀'; position: absolute; top: -30px; left: 50%; transform: translateX(-50%); font-size: 45px; filter: drop-shadow(0 0 10px var(--rose)); }
+        @keyframes cardEntry { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
 
         .slide { display: none; }
-        .slide.active { display: block; animation: fadeIn 0.8s ease; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .slide.active { display: block; animation: fadeIn 0.6s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
 
-        h1 { font-family: 'Dancing Script', cursive; color: var(--rose); font-size: 2.2em; margin-bottom: 10px; }
-        p { font-size: 0.9em; color: #666; }
+        h1 { font-family: 'Dancing Script', cursive; color: var(--rose); font-size: 2.1em; margin-bottom: 10px; }
+        p { font-size: 0.9em; color: #555; line-height: 1.6; }
+        .gif-img { width: 120px; margin-bottom: 15px; border-radius: 15px; }
 
-        .gif-img { width: 140px; margin-bottom: 15px; border-radius: 20px; }
+        /* Keypad */
+        .keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 15px; }
+        .key { background: #fff; color: var(--rose); border: none; padding: 12px; border-radius: 15px; font-weight: bold; box-shadow: 0 3px 0 var(--pink-bold); cursor: pointer; }
+        .key:active { transform: translateY(3px); box-shadow: none; }
+        .dot-container { display: flex; justify-content: center; gap: 8px; margin: 15px 0; }
+        .dot { width: 12px; height: 12px; border: 2px solid var(--pink-bold); border-radius: 50%; }
+        .dot.filled { background: var(--rose); border-color: var(--rose); }
 
-        /* KEYPAD STYLE */
-        .keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 20px; }
-        .key { 
-            background: var(--white); 
-            color: var(--rose); 
-            border: none; 
-            padding: 15px; 
-            border-radius: 20px; 
-            font-weight: bold; 
-            font-size: 1.2em;
-            cursor: pointer; 
-            box-shadow: 0 4px 0 var(--pink-bold);
-            transition: 0.1s;
-        }
-        .key:active { transform: translateY(4px); box-shadow: none; }
+        .btn-main { background: var(--rose); color: white; border: none; padding: 14px; border-radius: 50px; font-weight: bold; cursor: pointer; width: 100%; margin-top: 15px; box-shadow: 0 5px 15px rgba(255,105,180,0.3); }
+        #timer { background: var(--pink-bg); padding: 10px; border-radius: 15px; margin: 10px 0; color: var(--rose); font-weight: bold; font-size: 0.8em; border: 2px dashed var(--pink-bold); }
         
-        .dot-container { display: flex; justify-content: center; gap: 12px; margin: 20px 0; }
-        .dot { width: 15px; height: 15px; border: 2px solid var(--pink-bold); border-radius: 50%; }
-        .dot.filled { background: var(--rose); border-color: var(--rose); transform: scale(1.2); }
-
-        .btn-main { background: var(--rose); color: white; border: none; padding: 15px; border-radius: 50px; font-weight: bold; cursor: pointer; width: 100%; margin-top: 20px; box-shadow: 0 5px 15px rgba(255,105,180,0.3); }
-
-        #timer { background: var(--pink-bg); padding: 15px; border-radius: 25px; margin: 15px 0; color: var(--rose); font-size: 0.85em; font-weight: bold; border: 2px dashed var(--pink-bold); }
-
-        /* CANVAS PARTICLE */
         canvas { position: absolute; top: 0; left: 0; pointer-events: none; z-index: 100; }
     </style>
 </head>
-<body onclick="playMusic()" onmousemove="spawnTrail(event)">
+<body onclick="playMusic()">
     <div class="aurora"></div>
     <canvas id="canvas"></canvas>
     <audio id="lagu" loop><source src="https://files.catbox.moe/3v666v.mp3" type="audio/mpeg"></audio>
@@ -95,50 +51,77 @@
     <div class="container">
         <div class="slide active" id="s1">
             <img src="https://media.tenor.com/On7VseGwnmYAAAAi/peach-goma.gif" class="gif-img">
-            <h1>hallo sayangkuu! ❤️</h1>
-            <p>Ada kejutan kecil buat kamu..</p>
-            <button class="btn-main" onclick="next(2)">Lihat Kejutan ✨</button>
+            <h1>Halo Sayangkuu! ❤️</h1>
+            <p>Scroll sampe akhir ya, ada sesuatu buat kamu...</p>
+            <button class="btn-main" onclick="next(2)">Mulai ✨</button>
         </div>
 
         <div class="slide" id="s2">
-            <img src="https://media.tenor.com/8m4Yk_t6m70AAAAi/cute-cat.gif" class="gif-img" style="width: 100px;">
-            <p>hihi coba tebak passwordnya,<br><b>i bet u know!</b></p>
+            <p>Masukin tanggal jadian kita dulu yaa 🎀</p>
             <div class="dot-container" id="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
             <div class="keypad">
                 <button class="key" onclick="press(1)">1</button><button class="key" onclick="press(2)">2</button><button class="key" onclick="press(3)">3</button>
                 <button class="key" onclick="press(4)">4</button><button class="key" onclick="press(5)">5</button><button class="key" onclick="press(6)">6</button>
                 <button class="key" onclick="press(7)">7</button><button class="key" onclick="press(8)">8</button><button class="key" onclick="press(9)">9</button>
-                <button class="key" onclick="clearPass()" style="font-size: 0.7em;">C</button><button class="key" onclick="press(0)">0</button><button class="key">🎀</button>
+                <button class="key" onclick="clearPass()">C</button><button class="key" onclick="press(0)">0</button><button class="key">🎀</button>
             </div>
         </div>
 
         <div class="slide" id="s3">
             <img src="https://media.tenor.com/K_f9_4p366sAAAAi/tkthao219-bubududu.gif" class="gif-img">
-            <h1>Happy 1 Month!</h1>
-            <div id="timer">Loading time...</div>
-            <p>Makasih ya udah mau nemenin aku sampai detik ini. You are my best gift!</p>
-            <button class="btn-main" onclick="next(4)">Lanjut? ❤️</button>
+            <h1>Our Time Journey</h1>
+            <div id="timer">Counting...</div>
+            <p>Gak kerasa ya udah selama ini bareng-bareng.</p>
+            <button class="btn-main" onclick="next(4)">Next ➡️</button>
         </div>
 
         <div class="slide" id="s4">
             <img src="https://media.tenor.com/v8p1E9yX6m8AAAAi/cute-love.gif" class="gif-img">
-            <h1>Satu Pertanyaan..</h1>
-            <p>masih sayang banget kan sama Mavi?</p>
-            <button class="btn-main" onclick="celebrate()">SAYANG BANGET! ❤️</button>
-            <button class="btn-main" id="noBtn" style="background:white; color:var(--rose); border:1.5px solid var(--rose); box-shadow: none;" onmouseover="lari()">Nggak 🏃‍♂️</button>
+            <h1>First Month...</h1>
+            <p>Satu bulan ini banyak banget hal manis yang aku rasain bareng kamu.</p>
+            <button class="btn-main" onclick="next(5)">Lagi? ❤️</button>
         </div>
 
         <div class="slide" id="s5">
+            <p>Makasih ya udah jadi orang yang sabar banget ngadepin aku.</p>
+            <img src="https://media.tenor.com/z0S8u46A_mMAAAAi/love-couple.gif" class="gif-img">
+            <button class="btn-main" onclick="next(6)">Lanjut ✨</button>
+        </div>
+
+        <div class="slide" id="s6">
+            <h1>Kamu Tau Gak?</h1>
+            <p>Kehadiran kamu itu salah satu hal terbaik yang pernah ada di hidup aku.</p>
+            <button class="btn-main" onclick="next(7)">Terus? 🥺</button>
+        </div>
+
+        <div class="slide" id="s7">
+            <p>Aku harap kita gak cuma sebulan, tapi berbulan-bulan sampai selamanya.</p>
             <img src="https://media.tenor.com/j_6lY8hW6mAAAAAi/love-mochi.gif" class="gif-img">
-            <h1>I Love You More!</h1>
+            <button class="btn-main" onclick="next(8)">Beneran? ❤️</button>
+        </div>
+
+        <div class="slide" id="s8">
+            <h1>Satu Janji...</h1>
+            <p>Jangan pernah bosen ya sama aku? Tetap jadi Luna yang aku kenal.</p>
+            <button class="btn-main" onclick="next(9)">I Promise ❤️</button>
+        </div>
+
+        <div class="slide" id="s9">
+            <h1>Are You Ready?</h1>
+            <p>Ini kejutan buat kamu yang udah sabar nungguin slide-nya!</p>
+            <button class="btn-main" onclick="megaSurprise()">KLIK UNTUK KEJUTAN! 🎁</button>
+        </div>
+
+        <div class="slide" id="s10">
+            <img src="https://media.tenor.com/Fm82p9V3AFAAAAAi/love.gif" class="gif-img">
+            <h1 style="font-size: 1.5em; text-shadow: 0 0 10px var(--pink-bold);">HAPPY MANSIVERSARY!</h1>
             <p><b>Luna ❤️ Mavi</b></p>
-            <p style="font-size: 0.8em; margin-top: 10px;">Happy Mansiversary yang pertama. Stay with me forever!</p>
+            <p>I LOVE YOU MORE THAN WORDS CAN SAY!</p>
         </div>
     </div>
 
     <script>
-        let passInput = "";
-        const correctPass = "110126";
+        let passInput = ""; const correctPass = "110126";
         const audio = document.getElementById("lagu");
         function playMusic() { audio.play().catch(() => {}); }
 
@@ -160,38 +143,29 @@
             dots.forEach((dot, i) => i < passInput.length ? dot.classList.add('filled') : dot.classList.remove('filled'));
         }
 
-        function lari() {
-            const btn = document.getElementById('noBtn');
-            btn.style.position = 'fixed';
-            btn.style.left = Math.random() * 80 + '%'; btn.style.top = Math.random() * 80 + '%';
+        function megaSurprise() {
+            for(let i=0; i<3; i++) setTimeout(explode, i*500);
+            next(10);
         }
 
-        // PARTICLE SYSTEM
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
+        // Particle System
+        const canvas = document.getElementById('canvas'); const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        let particles = [];
-
-        function spawnTrail(e) {
-            for(let i=0; i<2; i++) {
-                particles.push({ x: e.pageX, y: e.pageY, v: {x: (Math.random()-0.5)*2, y: (Math.random()-0.5)*2}, a: 1, s: Math.random()*3 });
-            }
+        let p = [];
+        function explode() {
+            for(let i=0; i<100; i++) p.push({
+                x: canvas.width/2, y: canvas.height/2,
+                v: {x: (Math.random()-0.5)*15, y: (Math.random()-0.5)*15},
+                a: 1, s: Math.random()*5+2
+            });
         }
-
-        function celebrate() {
-            for(let i=0; i<150; i++) {
-                particles.push({ x: canvas.width/2, y: canvas.height/2, v: {x: (Math.random()-0.5)*15, y: (Math.random()-0.5)*15}, a: 1, s: Math.random()*5 });
-            }
-            next(5);
-        }
-
         function animate() {
             ctx.clearRect(0,0,canvas.width,canvas.height);
-            particles.forEach((p, i) => {
-                p.x += p.v.x; p.y += p.v.y; p.a -= 0.01;
-                ctx.globalAlpha = p.a; ctx.fillStyle = '#ff69b4';
-                ctx.beginPath(); ctx.arc(p.x, p.y, p.s, 0, Math.PI*2); ctx.fill();
-                if(p.a <= 0) particles.splice(i, 1);
+            p.forEach((item, i) => {
+                item.x += item.v.x; item.y += item.v.y; item.a -= 0.01;
+                ctx.globalAlpha = item.a; ctx.fillStyle = '#ff69b4';
+                ctx.beginPath(); ctx.arc(item.x, item.y, item.s, 0, Math.PI*2); ctx.fill();
+                if(item.a <= 0) p.splice(i, 1);
             });
             requestAnimationFrame(animate);
         }
